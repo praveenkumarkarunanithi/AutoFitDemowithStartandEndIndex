@@ -1,0 +1,170 @@
+<!DOCTYPE html><html lang="en"><head>
+        <title>EJ2 Grid</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Typescript Grid Control">
+        <meta name="author" content="Syncfusion">
+        <link href="index.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css">
+        
+        <!-- <script src="https://cdn.syncfusion.com/ej2/22.1.34/dist/ej2.min.js" type="text/javascript"></script> -->
+        <script src="ej2.min.js" type="text/javascript"></script>
+        <link
+        href="https://cdn.syncfusion.com/ej2/24.2.3/material.css"
+        rel="stylesheet"
+      />
+      <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+        
+    <!-- <script src="ej2.js"></script>
+	 -->
+    <script src="datasource.js" type="text/javascript"></script>
+    <style>
+       @media screen and (min-width: 600px) {
+
+
+}
+    </style>
+    </head>
+    <body>
+        <script id="template" type="text/x-template">
+            <div class="image">
+                <!-- <span>${ShipCountry} colTemp</span> -->
+                <img src='https://www.syncfusion.com/Content/en-US/Downloads/Images/MetroStudio/GraphicsPackage/IconPackage/application/Wireframe/User-WF.png'>
+            </div>
+          </script>
+          <div id="container">
+            <span>--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+            <h4><b>Frozen grid with `autoFitColumns`</b></h4>
+            <span>--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+            <!-- <p>grid.autoFitColumns(['CustomerID', 'ShipName', 'ShipAddress', 'ShipCity', 'ShipCountry'], startIndex, endIndex);</p> -->
+            <p><b>shipCountry</b> - temp / <b>ShipName</b> - min: 50 and max 100 / <b>ShipAddress</b> - plain autofit example / <b>ShipCity</b> - EllipsisWithTooltip</p>
+            <span>--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+            <label for="columnDropdown">Columns to AutoFit:</label>
+            <span id="columnDropdown"></span> 
+            <label for="startIndex">Start Index:</label>
+            <input type="number" id="startIndex" style="width: 80px;" value="1">
+
+            <label for="endIndex">End Index:</label>
+            <input type="number" id="endIndex" style="width: 80px;" value="1">
+
+
+            <label for="clipDropdown"> clipMode for ShipAddress col:</label>
+            <span id="clipDropdown"></span> 
+            <input type="checkbox" id="textWrapCheckbox" onchange="toggleTextWrap()">
+            <label for="textWrapCheckbox">Allow Text Wrap</label>
+            <button id="setButton">CallAutoFitColumns</button>
+            <button onclick="clearStorageValues()">Reset Grid</button>
+            <div id="Grid"></div>        
+          </div>
+          <br>
+          <div id="container2">
+            <span>--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+            <h4><b>Grid with `autoFitColumns`</b></h4>
+            <span>--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+            <!-- <p>grid2.autoFitColumns(['EmployeeID','Title', 'Address', 'Notes'], startIndex, endIndex);</p> -->
+            <p><b>EmployeeID</b> - Header priority / <b>Title</b> - plain autofit example / <b>Notes</b> - min: 100 and max 200 / <b>Address</b> - clip / <b>UnitsInStock</b> - GC, GF <b>HomePhone</b> - args.cancel</p>
+            <span>--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+            <label for="columnDropdown2">Columns to AutoFit:</label>
+            <span id="columnDropdown2"></span> 
+            <label for="startIndex2">Start Index:</label>
+            <input type="number" id="startIndex2" style="width: 80px;" value="1">
+
+            <label for="endIndex2">End Index:</label>
+            <input type="number" id="endIndex2" style="width: 80px;" value="1">
+
+            <label for="clipDropdown2"> clipMode for Address col:</label>
+            <span id="clipDropdown2"></span> 
+            <button id="setButton2">CallAutoFitColumns</button>
+            <button onclick="clearStorageValues2()">Reset Index Values</button>
+            <input type="checkbox" id="textWrapCheckbox2" onchange="toggleTextWrap2()">
+            <label for="textWrapCheckbox2">Allow Text Wrap</label>
+            <div id="Grid2"></div>        
+          </div>
+        <script>
+        window.addEventListener("DOMContentLoaded", function() {
+          var licenseBanner = document.querySelector("div[style*='position: fixed'][style*='top: 10px'][style*='left: 10px']");
+          if (licenseBanner) {
+            licenseBanner.style.display = "none";
+          }
+          var popupElement = document.getElementById('js-licensing');
+          if (popupElement) {
+            popupElement.style.display = 'none';
+          }
+          const element = document.querySelector('div[style="position: fixed; top: 10px; left: 10px; right: 10px; font-size: 14px; background: #EEF2FF; color: #222222; z-index: 999999999; text-align: left; border: 1px solid #EEEEEE; padding: 10px 11px 10px 50px; border-radius: 8px; font-family: Helvetica Neue, Helvetica, Arial;"]');
+          // Check if the element is found
+          if (element) {
+              // Hide the element by setting its display property to "none"
+              element.style.display = 'none';
+          }
+        });
+
+            
+
+            function saveInputValues () {
+            const startIndexInput = document.getElementById('startIndex');
+            const endIndexInput = document.getElementById('endIndex');
+
+            localStorage.setItem('startIndex', startIndexInput.value);
+            localStorage.setItem('endIndex', endIndexInput.value);
+            location.reload();
+            };
+
+            // Function to load input values from localStorage
+            function loadInputValues () {
+            const startIndexInput = document.getElementById('startIndex');
+            const endIndexInput = document.getElementById('endIndex');
+
+            startIndexInput.value = localStorage.getItem('startIndex') || '1';
+            endIndexInput.value = localStorage.getItem('endIndex') || '3';
+            };
+
+            function clearStorageValues() {
+            // localStorage.removeItem('startRowIndex');
+            // localStorage.removeItem('endRowIndex');
+            // localStorage.setItem('startIndex', 1);
+            // localStorage.setItem('endIndex', 3);
+            // alert('Storage values cleared successfully!');
+            location.reload();
+            }
+            document.getElementById('setButton').addEventListener('click', (e) => {
+            // Save input values to localStorage
+            callAutoFitColumns();
+            });
+
+            // for grid2
+            function saveInputValues2 () {
+            const startIndexInput = document.getElementById('startIndex2');
+            const endIndexInput = document.getElementById('endIndex2');
+
+            localStorage.setItem('startIndex2', startIndexInput.value);
+            localStorage.setItem('endIndex2', endIndexInput.value);
+            location.reload();
+            };
+
+            // Function to load input values from localStorage
+            function loadInputValues2 () {
+            const startIndexInput = document.getElementById('startIndex2');
+            const endIndexInput = document.getElementById('endIndex2');
+
+            startIndexInput.value = localStorage.getItem('startIndex2') || '1';
+            endIndexInput.value = localStorage.getItem('endIndex2') || '3';
+            };
+
+            function clearStorageValues2() {
+            // localStorage.removeItem('startRowIndex2');
+            // localStorage.removeItem('endRowIndex2');
+            // localStorage.setItem('startIndex2', 1);
+            // localStorage.setItem('endIndex2', 3);
+            // alert('Storage values cleared successfully!');
+            location.reload();
+            }
+            document.getElementById('setButton2').addEventListener('click', (e) => {
+            // Save input values to localStorage
+            callAutoFitColumns2();
+            });
+        </script>
+    <script src="sample.js" type="text/javascript"></script>
+    </body></html>
