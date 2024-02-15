@@ -4,7 +4,9 @@
 }
 
 .image img{
-  background-color: aquamarine;
+  background-color: rgb(63, 202, 202);
+  height: 50px;
+  width: 50px;
 }
 
 #loader {
