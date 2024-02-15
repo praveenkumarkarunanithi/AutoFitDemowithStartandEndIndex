@@ -32,7 +32,7 @@ var grid = new ej.grids.Grid({
     },
     columns: [
     {field: 'OrderID', headerText: 'Order ID', width: 120, isPrimaryKey: true, textAlign: 'Right',freeze: 'Left',},
-    {field: 'ShipCountry',headerText: 'ShipCountry',width: 150,template: '#template'},
+    {field: 'EmployeeID',headerText: 'EmployeeID',width: 150,template: '#template'},
     {field: 'ShipName',headerText: 'ShipName',width: 300,minWidth: 50,maxWidth: 100},
     {field: 'ShipAddress',headerText: 'Ship Address',width: 270,freeze: 'Fixed',},
     {field: 'ShipCity',headerText: 'Ship City',width: 250,clipMode: 'EllipsisWithTooltip'}],
