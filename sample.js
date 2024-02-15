@@ -55,7 +55,7 @@ function callAutoFitColumns() {
 
   grid.dataBound = function () {
   if (columnDropdown.value && columnDropdown.value.length) {
-    grid.autoFitColumns(columnDropdown.value, startIndexInput.value, endIndexInput.value);
+    grid.autoFitColumns(columnDropdown.value, parseInt(startIndexInput.value), parseInt(endIndexInput.value));
   }
  }
   grid.refresh();
@@ -171,7 +171,7 @@ function callAutoFitColumns2() {
 
   grid2.dataBound = function () {
   if (columnDropdown2.value && columnDropdown2.value.length) {
-    grid2.autoFitColumns(columnDropdown2.value, startIndexInput2.value, endIndexInput2.value);
+    grid2.autoFitColumns(columnDropdown2.value, parseInt(startIndexInput2.value), parseInt(endIndexInput2.value));
   }
  }
   grid2.refresh();
